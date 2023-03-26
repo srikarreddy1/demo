@@ -96,13 +96,13 @@ def getJarName() {
 }
 
 def getVersion() {
-    def pom = readMavenPom file: './pom.xml'
-    return pom.version
+    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+    return version
 }
 
 def getName() {
-    def pom = readMavenPom file: './pom.xml'
-    return pom.name
+    def name = sh script: 'mvn help:evaluate -Dexpression=project.name -q -DforceStdout', returnStdout: true
+    return name
 }
 
 def updateContainerDefinitionJsonWithImageVersion() {
