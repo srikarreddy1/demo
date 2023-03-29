@@ -55,7 +55,7 @@ pipeline {
                         script {
                            // def login = ecrLogin()
                            // sh('#!/bin/sh -e\n' + "${login}") // hide logging
-                            sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ECR_URL}"
+                            sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 773699476083.dkr.ecr.us-east-1.amazonaws.com"
                             docker.image("${AWS_ECR_URL}:${POM_VERSION}").push()
                         }
                     }
