@@ -53,9 +53,9 @@ pipeline {
                 withCredentials([string(credentialsId: 'AWS_REPOSITORY_URL_SECRET', variable: 'AWS_ECR_URL')]) {
                     withAWS(region: "${AWS_ECR_REGION}", credentials: 'personal-aws-ecr') {
                         script {
-                           // def login = ecrLogin()
-                           // sh('#!/bin/sh -e\n' + "${login}") // hide logging
-                            sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 773699476083.dkr.ecr.us-east-1.amazonaws.com"
+                            def login = ecrLogin()
+                            sh('#!/bin/sh -e\n' + "${login}") // hide logging
+                           // sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 773699476083.dkr.ecr.us-east-1.amazonaws.com"
                             docker.image("${AWS_ECR_URL}:${POM_VERSION}").push()
                         }
                     }
